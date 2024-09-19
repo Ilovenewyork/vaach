@@ -1,7 +1,6 @@
 <?php
 // Include header, navbar, and database connection
 include "header.php";
-include "navbar.php";
 include "conn.php";
 
 // Fetch approved languages from the database
@@ -45,8 +44,11 @@ $result = mysqli_query($conn, $query);
         </ul>
     </div>
 </div> -->
+<?php
+    include "navbar.php";
+?>
 
-<div class="p-8">
+<div class="p-8 min-h-screen">
     <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to <?php echo $name; ?>!</h1>
     <p class="text-lg text-gray-700 mb-6"><?php echo $motto; ?></p>
 
