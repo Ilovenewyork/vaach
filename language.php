@@ -123,7 +123,7 @@
             let phrasesDisplayed = false;
 
             phrasecards.forEach(phrasecard => {
-                const phrasename = phrasecard.querySelector('h5').innerText.toUpperCase();
+                const phrasename = Array.from(phrasecard.querySelectorAll('h2, p')).map(el => el.innerText).join(' ').toUpperCase();
                 if (!phrasename.includes(lookstr)) {
                     phrasecard.style.display = "none";
                 } else {
