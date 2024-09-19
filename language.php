@@ -21,7 +21,7 @@
     include "navbar.php";
     ?>
 
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto p-4 min-h-screen">
         <?php
         // Get language ID from URL or redirect to index.php
         $lang_id = $_GET["id"] ?? null;
