@@ -1,3 +1,3 @@
 <?php
-include "../vaachconn.php";
+include __DIR__ . "/../vaachconn.php";
 ?>
