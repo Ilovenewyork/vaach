@@ -8,7 +8,7 @@
 <body>
     <h1>Privacy Policy</h1>
     <p>
-        This privacy policy outlines how we handle data within the Low-Resource Language Translator Action,
+        This privacy policy outlines how we handle data within the vaach.org Action,
         which integrates with the vaach.org API and allows users to provide optional reference documents.
     </p>
     <h2>Data Collection</h2>
