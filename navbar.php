@@ -18,6 +18,7 @@
         </button>
         <div id="navbar-collapse" class="hidden lg:flex lg:items-center lg:space-x-6">
             <a href="index.php" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Home</a>
+            <a href="https://chatgpt.com/g/g-6776f1d3c2648191b92c2b586c78acfc-vaach-org-translator" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Translator</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <a href="language_request.php" class="text-gray-300 hover:text-white transition-colors duration-200 text-sm">Add a Language</a>
                 <?php if (in_array("admin", $_SESSION["tags"]) || in_array("superadmin", $_SESSION["tags"])): ?>
@@ -39,6 +40,7 @@
         </div>
         <div class="flex flex-col items-center">
             <a href="index.php" class="text-white text-lg py-2">Home</a>
+            <a href="https://chatgpt.com/g/g-6776f1d3c2648191b92c2b586c78acfc-vaach-org-translator" class="text-white text-lg py-2">Translator</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <a href="language_request.php" class="text-white text-lg py-2">Add a Language</a>
                 <?php if (in_array("admin", $_SESSION["tags"]) || in_array("superadmin", $_SESSION["tags"])): ?>
