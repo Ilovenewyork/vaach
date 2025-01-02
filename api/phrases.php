@@ -15,7 +15,7 @@ if (isset($_GET['lang_name'])) {
     if ($lang_stmt === false) {
         $response['status'] = 'error';
         $response['message'] = 'Failed to prepare language query: ' . $conn->error;
-        echo json_encode($response);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
         exit;
     }
     $lang_stmt->bind_param("s", $lang_name);
@@ -27,12 +27,12 @@ if (isset($_GET['lang_name'])) {
         $lang_id = $lang_row['lang_id'];
 
         // Language found, get its phrases
-        $phrase_query = "SELECT * FROM phrases WHERE lang_id = ?";
+        $phrase_query = "SELECT phrase, translation FROM phrases WHERE lang_id = ?";
         $phrase_stmt = $conn->prepare($phrase_query);
         if ($phrase_stmt === false) {
             $response['status'] = 'error';
             $response['message'] = 'Failed to prepare phrase query: ' . $conn->error;
-            echo json_encode($response);
+            echo json_encode($response, JSON_UNESCAPED_UNICODE);
             exit;
         }
         $phrase_stmt->bind_param("i", $lang_id);
@@ -40,51 +40,22 @@ if (isset($_GET['lang_name'])) {
         $phrase_result = $phrase_stmt->get_result();
 
         $phrases = array();
-        while ($row = $phrase_result->fetch_assoc()) {
-            $phrases[] = $row;
+        while ($phrase_row = $phrase_result->fetch_assoc()) {
+            $phrases[] = array(
+                'phrase' => $phrase_row['phrase'],
+                'translation' => $phrase_row['translation']
+            );
         }
-
-        // Close statement
-        $phrase_stmt->close();
-
         $response['status'] = 'success';
-        $response['data'] = $phrases;
+        $response['phrases'] = $phrases;
     } else {
-        // Language not found, return error
         $response['status'] = 'error';
         $response['message'] = 'Language not found';
-        $lang_stmt->close();
-        mysqli_close($conn);
-        echo json_encode($response);
-        exit;
     }
-
-    // Close language statement
-    $lang_stmt->close();
 } else {
-    // No language specified, get all phrases
-    $phrase_query = "SELECT * FROM phrases";
-    $phrase_result = mysqli_query($conn, $phrase_query);
-
-    if ($phrase_result === false) {
-        $response['status'] = 'error';
-        $response['message'] = 'Failed to execute phrase query: ' . $conn->error;
-        echo json_encode($response);
-        exit;
-    }
-
-    $phrases = array();
-    while ($row = mysqli_fetch_assoc($phrase_result)) {
-        $phrases[] = $row;
-    }
-
-    $response['status'] = 'success';
-    $response['data'] = $phrases;
+    $response['status'] = 'error';
+    $response['message'] = 'lang_name parameter is missing';
 }
 
-// Close database connection
-mysqli_close($conn);
-
-// Output the JSON data
-echo json_encode($response);
+echo json_encode($response, JSON_UNESCAPED_UNICODE);
 ?>
