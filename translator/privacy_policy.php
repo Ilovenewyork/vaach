@@ -54,8 +54,7 @@
     </ul>
     <h2>Contact</h2>
     <p>
-        If you have any questions or concerns about this privacy policy, please contact the system administrator
-        or refer to the documentation for the Low-Resource Language Translator.
+        If you have any questions or concerns about this privacy policy, please contact madhav@vaach.org.
     </p>
 </body>
 </html>
